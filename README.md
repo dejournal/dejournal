@@ -25,6 +25,8 @@ Deployed Contract on Rinkeby: [0x481f5c806e4af895739cc745de1c799aa16a0682](https
 
 ## Running locally
 
+Install Ganache and import network and key to Metamask.
+
 To start private network:
 ````
 testrpc

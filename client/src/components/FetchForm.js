@@ -11,7 +11,9 @@ class FetchForm extends Component {
 
     this.state = {
       loadingSubmission: false,
-      submission: null
+      submission: {
+        versions:[]
+      }
     };
   }
 
@@ -23,7 +25,7 @@ class FetchForm extends Component {
   }
 
   async loadSubmissionById(hashId) {
-    this.setState({loadingSubmission: true, submission: null});
+    this.setState({loadingSubmission: true, submission: {versions:[]}});
     try {
       let submission = await this.loadSubmission(hashId);
       this.setState({loadingSubmission: false, submission: submission});
@@ -111,11 +113,11 @@ class FetchForm extends Component {
           </div>
           <div className="pure-u-5-5">
             <label className="submission-label">Timestamp:</label>
-            <span className="submission-timestamp">{new Date(submission.timestamp * 1000).toISOString()}</span>
+            <span className="submission-timestamp">{new Date(submission.timestamp * 1000).toString()}</span>
           </div>
           <div className="pure-u-5-5">
             <label className="submission-label">Versions:</label>
-            <span className="submission-timestamp">{submission.versions.map((version) => this.renderVersions(version))}</span>
+            <span className="submission-timestamp">{/*submission.versions.map((version) => this.renderVersions(version))*/}</span>
           </div>
           <div className="pure-u-5-5">
           <LinkContainer to={"/submit/"+this.props.match.params.id}>
