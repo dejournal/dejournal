@@ -37,9 +37,9 @@ class FetchForm extends Component {
   }
 
   loadSubmission(hashId) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       let submission = {};
-      this.props.hashStoreContractInstance.getPaperByID(hashId).then((values) => {
+      this.props.hashStoreContractInstance.getPaperByID(hashId).then( async (values) => {
         if (values[0] === "0x0000000000000000000000000000000000000000") {
           return reject(new Error("Submission not found"));
         }
@@ -58,14 +58,16 @@ class FetchForm extends Component {
           submission.title = data.title;
           submission.text = data.text;
           submission.fullName = data.fullName;
-          if (submission.versionsLength > 1) {
-            submission.versions = [];
+          submission.file = data.file;
+          submission.versions = [];
+          //if (submission.versionsLength > 1) {
+            
             for (let i=0;i<submission.versionsLength; i++) {
-              await this.props.hashStoreContractInstance.getVersionByID(hashId,i).then((val) => {
+              await this.props.hashStoreContractInstance.getVersionByID(hashId,i).then(async (val) => {
                 submission.versions.push(val.toNumber())
               })
             }
-          }
+          //}
           resolve(submission);
         });
       }).catch((err) => {
@@ -109,7 +111,7 @@ class FetchForm extends Component {
           <div className="pure-u-5-5">
             <label className="submission-label">IPFS Hash:</label>
             <a className="submission-hash-content" target="_blank" rel="noopener noreferrer"
-               href={`https://ipfs.infura.io:5001/api/v0/cat/${submission.hashContent}`}>{submission.hashContent}</a>
+               href={`https://ipfs.infura.io:5001/api/v0/cat/${submission.file}`}>{submission.file}</a>
           </div>
           <div className="pure-u-5-5">
             <label className="submission-label">Timestamp:</label>
@@ -117,7 +119,7 @@ class FetchForm extends Component {
           </div>
           <div className="pure-u-5-5">
             <label className="submission-label">Versions:</label>
-            <span className="submission-timestamp">{/*submission.versions.map((version) => this.renderVersions(version))*/}</span>
+            <span className="submission-timestamp">{submission.versions.map((version) => this.renderVersions(version))}</span>
           </div>
           <div className="pure-u-5-5">
           <LinkContainer to={"/submit/"+this.props.match.params.id}>
