@@ -12,9 +12,9 @@ Submission price collected by the contract: 0.001 ETH
 
 TODO:
 
-App live at: [https://dejournal.firebaseapp.com](https://dejournal.firebaseapp.com)
+App live at: [https://dejournal-39b67.firebaseapp.com/](https://dejournal-39b67.firebaseapp.com/)
 
-Deployed Contract on Rinkeby: [0x481f5c806e4af895739cc745de1c799aa16a0682](https://rinkeby.etherscan.io/address/0x481f5c806e4af895739cc745de1c799aa16a0682)
+Deployed Contract on Rinkeby: [0xB22c2C1D1289B873bcbB25560D73048435B7220d](https://rinkeby.etherscan.io/address/0xB22c2C1D1289B873bcbB25560D73048435B7220d)
 
 ## Tools
 
