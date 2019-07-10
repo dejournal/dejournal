@@ -1,4 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dejournal Ðapp frontend
+
+Dejournal is a Distributed Application (Dapp) running on the Ethereum Blockchain.
+It allows you to :
+- Save arbitrary text on the InterPlanetary File System (IPFS )
+- Receive a receipt for your text submission
+- Prove time of submission (via block timestamp)
+
+- Front End Framework: React
+
+## Demo
+
+App live at: [https://dejournal-39b67.firebaseapp.com/](https://dejournal-39b67.firebaseapp.com/)
 
 ## Available Scripts
 
@@ -37,11 +49,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Deployment
+
+1. Create the production build with `npm run build`.
+2. Then run `firebase deploy` to deploy the app to firebase.
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
 
