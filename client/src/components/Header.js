@@ -9,7 +9,7 @@ class Header extends Component{
         return (
             <header>
                 <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">Dejournal</Navbar.Brand>  
+                <Navbar.Brand href="/">Dejournal</Navbar.Brand>  
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     

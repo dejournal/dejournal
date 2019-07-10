@@ -12,25 +12,11 @@ class IntroJumbo extends Component {
   render() {
     return (
             <Jumbotron>
-              <h1>Dejournal Dapp</h1>
-              <p>Dejournal is a <b>Distributed Application (Dapp)</b> running on the Ethereum Blockchain.
-                <br/>
-                It allows you to :
-              </p>
-              <ul>
-                <li>
-                  Publish scientific papers on the InterPlanetary
-                  File System (<a href="https://ipfs.io/" target="_blank" rel="noopener noreferrer">IPFS</a> )
-                </li>
-                <li>
-                  Receive a receipt for your text submission
-                </li>
-                <li>
-                  Prove time of submission (via block timestamp)
-                </li>
-              </ul>
+              <h1 className="display-3">Dejournal pre-prints</h1>
+              <p className="lead">Publish scientific paper pre-prints 
+                on <a href="https://www.ethereum.org/">Ethereum Blockchain</a> and <a href="https://ipfs.io/">IPFS</a>. 
+                Dejournal makes scientific publishing open, transparent and decentralized.</p>
               </Jumbotron>
-              
     );
   }
 }

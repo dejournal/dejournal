@@ -16,8 +16,8 @@ import Header from './components/Header';
 /*import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'*/
-import './App.css'
 import './css/bootstrap.css';
+import './App.css'
 
 
 
@@ -135,29 +135,6 @@ class App extends Component {
   }
 
 
-
-  onSubmit(hashId) {
-    this.setState({submitFormDisplayed: false});
-  }
-
-  showSubmitForm() {
-    this.setState({submitFormDisplayed: true});
-    this.setState({fetchFormDisplayed: false});
-    this.setState({recentSubmissionsDisplayed: false});
-  }
-
-  showFetchForm() {
-    this.setState({fetchFormDisplayed: true});
-    this.setState({submitFormDisplayed: false});
-    this.setState({recentSubmissionsDisplayed: false});
-  }
-
-  showRecentSubmissions() {
-    this.setState({recentSubmissionsDisplayed: true});
-    this.setState({fetchFormDisplayed: false});
-    this.setState({submitFormDisplayed: false});
-  }
-
   render() {
     let noNetworkError = (this.state.web3 ?
       <h3 className="no-network">The App is only live on Rinkeby Test Network, please setup MetaMask/Mist to connect to
@@ -166,13 +143,13 @@ class App extends Component {
         href="https://metamask.io/">MetaMask</a> or Mist</h3>);
 
     return (
-      <div className="App">
+      <div className="App h-100">
         <Router>
         <NotificationSystem ref="notificationSystem"/>
 
         <Header web3={this.state.web3} loadingWeb3={this.state.loadingWeb3} networkName={this.state.networkName}/>
 
-        <main>
+        <main className="flex-fill flex-shrink-0">
             <Container>
               <div className="content">
               <Loader loaded={!this.state.loadingWeb3 && !this.state.loadingContract}>
@@ -194,28 +171,36 @@ class App extends Component {
             }
               </Loader>
               </div>
+              </Container>
+              </main>
 
 
-
-          <div className="footer-grid">
+              <footer className="footer mt-5 py-3">
+                <Container>
             <Row>
-              <Col>
+              <Col md={6}>
               <em>Created by Dejournal - 2019</em>
               </Col>
 
-              <Col>
+              <Col md={3}>
               <a href="https://twitter.com/tilenkranjc">Twitter</a>
               </Col>
 
-              <Col>
+              <Col md={3}>
               <a href="https://github.com/tilenkranjc">Github</a>
               </Col>
 
             </Row>
 
-            </div>
-          </Container>
-        </main>
+            <Row className="footer-copyright">
+              <Col className="text-center py-3">
+              <em>Created by Dejournal - 2019</em>
+              </Col>
+            </Row>
+            </Container>
+            </footer>
+          
+        
         </Router>
       </div>
     );

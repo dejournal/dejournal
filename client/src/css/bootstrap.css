@@ -10589,7 +10589,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 p {
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  /*font-family: Georgia, Cambria, "Times New Roman", Times, serif;*/
 }
 
 blockquote {

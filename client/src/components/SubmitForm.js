@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {Form, FormControl, Button} from 'react-bootstrap';
+import {Form, FormControl, Button, Alert, Row, Col} from 'react-bootstrap';
 
 var Loader = require('react-loader');
 
@@ -162,41 +162,45 @@ class SubmitForm extends Component {
     return (
       <div className="SubmitForm">
         {this.props.match.params.id ? (
-        <h3> Adding new version to {this.props.match.params.id} </h3>    
+        <h1> Adding new version to {this.props.match.params.id} </h1>    
             ) : (
-              <h3> Choose file to publish on Dejournal </h3> 
+              <h1> Publish a pre-print on Dejournal </h1> 
             )      
             }
         <Loader loaded={!this.state.loadingVersion}>
           {this.props.match.params.id && !this.state.submission ? (
-            <h5>No paper found.</h5>
+            <Alert variant="danger">
+            ERROR: Paper with ID {this.props.match.params.id} was not found.
+          </Alert>
           ) : ( 
           <div>
-        <h5>Submission price: {this.props.web3.utils.fromWei(this.state.price, 'ether')} ETH</h5>
-        <Form>
-        <Form.Group controlId="formGroupTitle">
+
+        <Row>
+          <Col xs={10}>
+        <Form className="mt-3">
+        <Form.Group controlId="formGroupTitle" className="mt-3">
         <FormControl required type = "text" onChange = {e => this.updateInputValue(e, 'title')} 
               placeholder = "Title" value={this.state.title}/>
         </Form.Group>
-        <Form.Group controlId="formGroupAuthors">
+        <Form.Group controlId="formGroupAuthors" className="mt-4">
         <FormControl required type = "text" onChange = {e => this.updateInputValue(e, 'fullName')} 
               placeholder = "Authors" value={this.state.fullName}/>
         </Form.Group>
-        <Form.Group controlId="formGroupAbstract">
+        <Form.Group controlId="formGroupAbstract" className="mt-4">
         <FormControl required as = "textarea" onChange = {e => this.updateInputValue(e, 'text')} 
-              placeholder = "Abstract" value={this.state.text}/>
+              placeholder = "Abstract" value={this.state.text} rows="10"/>
         </Form.Group>
-        <Form.Group controlId="formGroupFile">
+        <Form.Group controlId="formGroupFile" className="my-4">
           <FormControl required           
             type = "file"
             onChange = {this.captureFile}
           />
           </Form.Group>
           
-
+          <div><small>Submission price: {this.props.web3.utils.fromWei(this.state.price, 'ether')} ETH</small></div>
           <Loader loaded={!this.state.savingText}>
           <Button
-            type="submit" className="pure-button pure-input-1-2 button-success"
+            type="submit" className="mt-3 pure-button pure-input-1-2 button-success"
             disabled={!this.validForm() || this.state.savingText} 
             onClick={() => this.saveText()}>
               Submit             
@@ -204,6 +208,8 @@ class SubmitForm extends Component {
           </Loader>
       
         </Form>
+        </Col>
+        </Row>
         </div>
           )
        }

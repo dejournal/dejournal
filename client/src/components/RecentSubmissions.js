@@ -66,56 +66,26 @@ class RecentSubmissions extends Component {
   renderSubmission(submission) {
     return (
       <div className="submission" key={submission.hashId}>
-        <div className="pure-g">
-          <div className="pure-u-8-24">
-            <label className="submission-label">Id:</label>
-            <a href={"/show/"+submission.hashId} className="submission-id">{submission.hashId}</a>
-          </div>
-          <div className="pure-u-8-24">
-            <label className="submission-label">Title:</label>
-            <span className="submission-title">{submission.title}</span>
-          </div>
-          <div className="pure-u-8-24">
-            <label className="submission-label">Full Name:</label>
-            <span className="submission-full-name">{submission.fullName}</span>
-          </div>
-          <div className="pure-u-5-5">
-            <p className="submission-text">{submission.text}</p>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">Sent from:</label>
-            <span className="submission-sender">{submission.sender}</span>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">IPFS Hash:</label>
-            <a className="submission-hash-content"   target="_blank" rel="noopener noreferrer" 
-               href={`https://ipfs.infura.io:5001/api/v0/cat/${submission.hashContent}`}>{submission.hashContent}</a>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">IPFS File Hash:</label>
-            <a className="submission-filehash-content"   target="_blank" rel="noopener noreferrer" 
-               href={`https://ipfs.infura.io:5001/api/v0/cat/${submission.file}`}>{submission.file}</a>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">Timestamp:</label>
-            <span className="submission-timestamp">{new Date(submission.timestamp*1000).toISOString()}</span>
-          </div>
-        </div>
+          <h3><a href={"/show/"+submission.hashId} className="submission-id">{submission.title}</a></h3>
+          <div className="submission-authors">{submission.fullName}</div> 
+          <div className="submission-date"><small className="text-muted">
+            Published on: {new Date(submission.timestamp*1000).toLocaleDateString('en-EN', 
+            { year: 'numeric', month: 'long', day: 'numeric' })}</small></div>
       </div>);
   }
 
   render() {
     return (
-      <div className="RecentSubmissions">
+      <div>
         <IntroJumbo/>
-        <div className="pure-u-1-1">
-          <h3>Recent Submissions</h3>
-          <div className="content">
+        <div className="mt-5 latest-preprints">
+          <h2>Latest Pre-prints</h2>
+          <div className="submissions">
           <Loader loaded={!this.state.loadingRecentSubmissions}>
             {this.state.recentSubmissions.map((submission) => this.renderSubmission(submission))}
           </Loader>
           </div>
-        </div>
+          </div>
       </div>
     );
   }

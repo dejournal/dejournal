@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {Button} from 'react-bootstrap';
+import {Button, Row, Col} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 
 var Loader = require('react-loader');
@@ -78,54 +78,61 @@ class FetchForm extends Component {
 
   renderVersions(version) {
     return (
-      <span key={version}>
+      <ul className="mb-1">
+      <li key={version}>
       <a href={"/show/"+version}>{version}</a>&nbsp;
-      </span>
+      </li>
+      </ul>
     )
   }
 
   renderSubmission(submission) {
 
     return (
-      <div className="submission" key={submission.hashId}>
-        <div className="pure-g">
-          <div className="pure-u-8-24">
-            <label className="submission-label">Id:</label>
-            <span className="submission-id">{submission.hashId}</span>
-          </div>
-          <div className="pure-u-8-24">
-            <label className="submission-label">Title:</label>
-            <span className="submission-title">{submission.title}</span>
-          </div>
-          <div className="pure-u-8-24">
-            <label className="submission-label">Full Name:</label>
-            <span className="submission-full-name">{submission.fullName}</span>
-          </div>
-          <div className="pure-u-5-5">
-            <p className="submission-text">{submission.text}</p>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">Sent from:</label>
-            <span className="submission-sender">{submission.sender}</span>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">IPFS Hash:</label>
-            <a className="submission-hash-content" target="_blank" rel="noopener noreferrer"
-               href={`https://ipfs.infura.io:5001/api/v0/cat/${submission.file}`}>{submission.file}</a>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">Timestamp:</label>
-            <span className="submission-timestamp">{new Date(submission.timestamp * 1000).toString()}</span>
-          </div>
-          <div className="pure-u-5-5">
-            <label className="submission-label">Versions:</label>
-            <span className="submission-timestamp">{submission.versions.map((version) => this.renderVersions(version))}</span>
-          </div>
-          <div className="pure-u-5-5">
-          <LinkContainer to={"/submit/"+this.props.match.params.id}>
-          <Button>Add version</Button></LinkContainer>
-          </div>
+      <div key={submission.hashId}>
+        <Row>
+        <Col>
+        <h1>{submission.title}</h1>
+        
+        
+        <div className="submission-authors">{submission.fullName}</div> 
+        <div className="submission-date"><small className="text-muted">
+            Published on: {new Date(submission.timestamp*1000).toLocaleDateString('en-EN', 
+            { year: 'numeric', month: 'long', day: 'numeric' })}</small></div>
+
+        <p className="mt-3 submission-abstract">{submission.text}</p>
+
+        <div className="mb-3 submission-versions">Versions of this file: 
+        {submission.versions.map((version) => this.renderVersions(version))}
+        <LinkContainer to={"/submit/"+this.props.match.params.id}>
+              <a href="#">Add version</a></LinkContainer>
+
+        
         </div>
+
+            
+
+            <div className="submission-sender">
+              <small className="text-muted">
+              Sent from wallet: {submission.sender} <br/>
+              Submission hash: {submission.hashContent} <br/>
+              Manuscript hash: <a className="submission-hash-content" target="_blank" rel="noopener noreferrer"
+               href={`https://ipfs.infura.io:5001/api/v0/cat/${submission.file}`}>{submission.file}</a> <br/>
+
+              </small>
+
+            </div>
+            </Col>
+            <Col xs={3}>
+              <div className="my-3">
+              <Button href={"https://ipfs.infura.io:5001/api/v0/cat/"+submission.file} 
+              className="mt-3 btn-side btn-read" variant="primary" size="lg">Read</Button>
+              </div>
+              <div className="my-3">
+              
+              </div>
+            </Col>
+            </Row>
       </div>);
   }
 
@@ -135,13 +142,10 @@ class FetchForm extends Component {
 
   render() {
     return (
-      <div className="FetchForm">
-        <h3>Fetch Submission</h3>
-        <div className="Papers">
+      <div className="show-submission">
           <Loader loaded={!this.state.loadingSubmission}>
             {this.state.submission ? this.renderSubmission(this.state.submission) : null}
           </Loader>
-        </div>
       </div>
     );
   }
